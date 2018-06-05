@@ -1,6 +1,7 @@
 import chai from 'chai'
 import sinon from 'sinon'
-import { MyLib } from '../../lib/mylibrary.js'
+import { describe, it } from 'mocha'
+import { MyLib } from '../../dist/my-library.js'
 
 const assert = chai.assert
 sinon.assert.expose(assert, { prefix: '' })
