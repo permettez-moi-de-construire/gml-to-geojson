@@ -1,3 +1,3 @@
-import GmlToGeojson from './gml-to-geojson.js'
+import gmlToGeojson from './gml-to-geojson.js'
 
-export default GmlToGeojson
+export default gmlToGeojson

@@ -1,11 +1,7 @@
-/**
- * A fantastic class
- * @class
- */
-class GmlToGeojson {
-  constructor () {
-    this.name = 'foo'
-  }
+const gmlPolygonToGeoJSON = function (gmlPolygon) {
+
 }
 
-export default GmlToGeojson
+export default {
+  gmlPolygonToGeoJSON
+}
