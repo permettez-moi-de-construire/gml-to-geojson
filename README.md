@@ -19,6 +19,10 @@ ES6 source files
   in umd format
 ```
 
+## Usage
+
+See [API documentation](doc/API.md)
+
 ## Scripts
 
 * `npm run compile` - produce builds for the app
