@@ -50,7 +50,7 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "jsdoc-to-markdown": "^4.0.1",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "mocha": "^4.0.1",
     "shx": "^0.2.2",
     "sinon": "^4.4.6",
