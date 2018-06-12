@@ -1,22 +1,13 @@
-# webpack-library-starter
+# gml-to-geojson
 
-Webpack based boilerplate for producing libraries (Input: ES6, Output: universal library)
+Translate gml geometries to geojson
 
 [![Build status](https://travis-ci.org/permettez-moi-de-construire/webpack-library-starter.svg?branch=master)](https://travis-ci.org/permettez-moi-de-construire/webpack-library-starter.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/<badgeid>/maintainability)](https://codeclimate.com/github/permettez-moi-de-construire/webpack-library-starter/maintainability)
 
-## Process
+## Installation
 
 ```
-ES6 source files
-       |
-       |
-    webpack
-       |
-       +--- babel, eslint
-       |
-  ready to use
-     library
-  in umd format
+npm install @permettezmoideconstruire/gml-to-geojson
 ```
 
 ## Usage

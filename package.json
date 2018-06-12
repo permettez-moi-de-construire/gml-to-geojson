@@ -1,8 +1,8 @@
 {
-  "name": "my-library",
-  "version": "0.0.1",
-  "description": "DESCRIPTION HERE",
-  "main": "dist/my-library.js",
+  "name": "@permettez-moi-de-construire/gml-to-geojson",
+  "version": "0.0.1-alpha",
+  "description": "Translate gml geometries to geojson",
+  "main": "dist/gml-to-geojson.js",
   "scripts": {
     "clean": "shx rm -rf dist",
     "ready": "shx mkdir -p dist",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:permettez-moi-de-construire/webpack-library-starter.git"
+    "url": "git@github.com:permettez-moi-de-construire/gml-to-geojson.git"
   },
   "keywords": [
     "es6",
@@ -31,9 +31,9 @@
   "author": "Cyril CHAPON",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/permettez-moi-de-construire/webpack-library-starter/issues"
+    "url": "https://github.com/permettez-moi-de-construire/gml-to-geojson/issues"
   },
-  "homepage": "https://github.com/permettez-moi-de-construire/webpack-library-starter",
+  "homepage": "https://github.com/permettez-moi-de-construire/gml-to-geojson",
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.42",
     "@babel/core": "7.0.0-beta.42",
@@ -50,6 +50,7 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "jsdoc-to-markdown": "^4.0.1",
+    "lodash": "^4.17.5",
     "mocha": "^4.0.1",
     "shx": "^0.2.2",
     "sinon": "^4.4.6",
@@ -58,7 +59,5 @@
     "webpack": "^3.10.0",
     "yargs": "^10.0.3"
   },
-  "dependencies": {
-    "lodash": "^4.17.5"
-  }
+  "dependencies": {}
 }

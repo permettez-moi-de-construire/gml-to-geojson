@@ -1,4 +1,3 @@
-import MyLib from './MyLib.js'
+import GmlToGeojson from './gml-to-geojson.js'
 
-export { MyLib }
-export default MyLib
+export default GmlToGeojson
