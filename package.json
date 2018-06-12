@@ -7,10 +7,16 @@
     "clean": "shx rm -rf dist",
     "ready": "shx mkdir -p dist",
     "compile": "npm run clean && npm run ready && webpack --env dev && webpack --env build",
+    "clean:doc": "shx rm -rf doc",
+    "ready:doc": "shx mkdir -p doc",
+    "doc": "npm run clean:doc && npm run ready:doc && jsdoc2md src/**/*.js > doc/API.md",
     "build": "npm run compile && npm run test",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha --require @babel/register --colors --recursive ./test/**/*.js",
-    "test:watch": "mocha --require @babel/register --colors -w --recursive ./test/**/*.js"
+    "test": "mocha --require @babel/register --colors --recursive --require ./test/index.js ./test/**/*.js",
+    "test:watch": "mocha --require @babel/register --colors -w --recursive --require ./test/index.js ./test/**/*.js"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "repository": {
     "type": "git",
@@ -33,14 +39,17 @@
     "@babel/core": "7.0.0-beta.42",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.42",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0-beta.49",
     "@babel/preset-env": "7.0.0-beta.42",
     "@babel/register": "^7.0.0-beta.42",
-    "babel-eslint": "^8.2.2",
+    "babel-eslint": "8.2.1",
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
+    "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^4.0.1",
     "shx": "^0.2.2",
     "sinon": "^4.4.6",

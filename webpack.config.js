@@ -36,10 +36,9 @@ const config = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'standard-loader',
-        exclude: /(node_modules)/,
-        options: {
-          parser: 'babel-eslint'
-        }
+        exclude: /(node_modules)/
+        // use "package" entry inside package.json
+        // options: {}
       },
       {
         test: /\.js$/,
