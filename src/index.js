@@ -1,7 +1,9 @@
-import gmlToGeojson from './gml-to-geojson.js'
+import wfsToGeojson from './wfs.js'
 import errors from './errors'
 
 export default {
-  ...gmlToGeojson,
+  wfs: {
+    ...wfsToGeojson
+  },
   errors
 }
