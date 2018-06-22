@@ -6,7 +6,12 @@ import proj4 from 'proj4'
 
 proj.setProj4(proj4)
 
-const featureCollectionToGeoJSON = function (gmlFeatureCollectionString) {
+/**
+ * Convert a WFS FeatureCollection to a GeoJSON FeatureCollection
+ * @param {String} wfsFeatureCollectionString
+ * @returns {Object} GeoJSON FeatureCollection
+ */
+const featureCollectionToGeoJSON = function (wfsFeatureCollectionString) {
   const defaultOptions = {
     inputProjection: 'EPSG:2154',
     outputProjection: 'EPSG:4326'
@@ -15,7 +20,7 @@ const featureCollectionToGeoJSON = function (gmlFeatureCollectionString) {
     gmlFormat: new Gml()
   })
   const geoJSON = new GeoJSON()
-  const foundFeatures = wfs.readFeatures(gmlFeatureCollectionString)
+  const foundFeatures = wfs.readFeatures(wfsFeatureCollectionString)
   const foundGeoJSON = geoJSON.writeFeatures(foundFeatures, {
     dataProjection: defaultOptions.outputProjection,
     featureProjection: defaultOptions.inputProjection
@@ -24,6 +29,11 @@ const featureCollectionToGeoJSON = function (gmlFeatureCollectionString) {
   return foundFeatureCollection
 }
 
+/**
+ * Convert WFS stuff to GeoJSON
+ * @module wfs
+ * @memberof module:gmlToGeojson
+ */
 export default {
   featureCollectionToGeoJSON
 }

@@ -9,7 +9,7 @@
     "compile": "npm run clean && npm run ready && webpack --env dev && webpack --env build",
     "clean:doc": "shx rm -rf doc",
     "ready:doc": "shx mkdir -p doc",
-    "doc": "npm run clean:doc && npm run ready:doc && jsdoc2md src/**/*.js > doc/API.md",
+    "doc": "npm run clean:doc && npm run ready:doc && jsdoc2md src/*.js src/**/*.js > doc/API.md",
     "build": "npm run compile && npm run test",
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require @babel/register --colors --recursive --require ./test/index.js ./test/**/*.js",
