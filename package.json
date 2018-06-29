@@ -42,6 +42,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.0.0-beta.49",
     "@babel/preset-env": "7.0.0-beta.42",
     "@babel/register": "^7.0.0-beta.42",
+    "@turf/boolean-clockwise": "^6.0.1",
     "babel-eslint": "8.2.1",
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-add-module-exports": "^0.2.1",

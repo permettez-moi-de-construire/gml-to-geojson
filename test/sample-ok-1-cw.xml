@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding="ISO-8859-1" ?>
+<wfs:FeatureCollection
+   xmlns:ms="http://mapserver.gis.umn.edu/mapserver"
+   xmlns:gml="http://www.opengis.net/gml"
+   xmlns:wfs="http://www.opengis.net/wfs"
+   xmlns:ogc="http://www.opengis.net/ogc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://mapserver.gis.umn.edu/mapserver http://atl-p0-app001.culture.fr:5522/cgi-bin/mapserv?SERVICE=WFS&amp;VERSION=1.1.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME=MD_2772&amp;OUTPUTFORMAT=text/xml;%20subtype=gml/3.1.1  http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsName="EPSG:2154">
+            <gml:lowerCorner>670465.440000 7098385.849998</gml:lowerCorner>
+            <gml:upperCorner>670942.990000 7098888.229999</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ms:MD_2772>
+            <gml:boundedBy>
+                <gml:Envelope srsName="EPSG:2154">
+                    <gml:lowerCorner>670839.330000 7098385.849998</gml:lowerCorner>
+                    <gml:upperCorner>670871.520000 7098419.289998</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ms:msGeometry>
+                <gml:Polygon srsName="EPSG:2154">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList srsDimension="2">670857.730000 7098419.289998 670871.520000 7098399.569998 670863.820000 7098394.390000 670864.530000 7098393.260000 670857.730000 7098419.289998 </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ms:msGeometry>
+            <ms:CODE>PA00107552</ms:CODE>
+            <ms:IMMEUBLE>H?tel de ville</ms:IMMEUBLE>
+            <ms:PROTECTION>Class?</ms:PROTECTION>
+            <ms:DATE_PROT>19100122</ms:DATE_PROT>
+            <ms:TYPE_PROT>R500</ms:TYPE_PROT>
+            <ms:REF_MERIM>PA00107552</ms:REF_MERIM>
+            <ms:LIEN_MERIM>http://www.culture.gouv.fr/public/mistral/merimee_fr?ACTION=CHERCHER&amp;FIELD_1=REF&amp;VALUE_1=PA00107552</ms:LIEN_MERIM>
+            <ms:SURFACE>492.90159783633</ms:SURFACE>
+            <ms:COORD_X>670856.02562513726</ms:COORD_X>
+            <ms:COORD_Y>7098403.27610291170</ms:COORD_Y>
+            <ms:TYPE_SERV>R500</ms:TYPE_SERV>
+            <ms:INSEE>59309</ms:INSEE>
+            <ms:COMMUNE>HONDSCHOOTE</ms:COMMUNE>
+            <ms:DEPARTEMEN>NORD</ms:DEPARTEMEN>
+            <ms:REGION>NORD-PAS-DE-CALAIS</ms:REGION>
+            <ms:AGREGEE>IPVDAP</ms:AGREGEE>
+        </ms:MD_2772>
+    </gml:featureMember>
+</wfs:FeatureCollection>
