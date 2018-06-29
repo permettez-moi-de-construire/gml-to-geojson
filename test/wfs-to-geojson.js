@@ -9,6 +9,15 @@ import path from 'path'
 import { isFeatureCollection, isFeature, positionsOf, geometriesOf } from 'gjtk'
 import isClockWise from '@turf/boolean-clockwise'
 
+const validateRings = rings => {
+  const [
+    outerRing,
+    ...innerRings
+  ] = rings
+  assert.isNotOk(isClockWise(outerRing))
+  innerRings.forEach(innerRing => assert.isOk(isClockWise(innerRings)))
+}
+
 const {
   featureCollectionToGeoJSON: wfsFeatureCollectionToGeoJSON
 } = wfs
@@ -129,19 +138,10 @@ describe('wfsToGeoJSON function', () => {
       parsedFeatureCollection.features.forEach(feature => assert.ok(isFeature(feature)))
     })
 
-    it('should return clowises Features', () => {
+    it('should return clockwises Features', () => {
       const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
 
       geometriesOf(parsedFeatureCollection).forEach(geometry => {
-        const validateRings = rings => {
-          const [
-            outerRing,
-            ...innerRings
-          ] = geometry.coordinates
-          assert.isOk(isClockWise(outerRing))
-          innerRings.forEach(innerRing => assert.isNotOk(isClockWise(innerRings)))
-        }
-
         switch (geometry.type) {
           case 'Polygon':
             validateRings(geometry.coordinates)
@@ -177,19 +177,10 @@ describe('wfsToGeoJSON function', () => {
       parsedFeatureCollection.features.forEach(feature => assert.ok(isFeature(feature)))
     })
 
-    it('should return clowises Features', () => {
+    it('should return clockwises Features', () => {
       const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
 
       geometriesOf(parsedFeatureCollection).forEach(geometry => {
-        const validateRings = rings => {
-          const [
-            outerRing,
-            ...innerRings
-          ] = geometry.coordinates
-          assert.isOk(isClockWise(outerRing))
-          innerRings.forEach(innerRing => assert.isNotOk(isClockWise(innerRings)))
-        }
-
         switch (geometry.type) {
           case 'Polygon':
             validateRings(geometry.coordinates)
