@@ -23,7 +23,8 @@ const featureCollectionToGeoJSON = function (wfsFeatureCollectionString) {
   const foundFeatures = wfs.readFeatures(wfsFeatureCollectionString)
   const foundGeoJSON = geoJSON.writeFeatures(foundFeatures, {
     dataProjection: defaultOptions.outputProjection,
-    featureProjection: defaultOptions.inputProjection
+    featureProjection: defaultOptions.inputProjection,
+    rightHanded: true
   })
   const foundFeatureCollection = JSON.parse(foundGeoJSON)
   return foundFeatureCollection
