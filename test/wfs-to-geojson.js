@@ -23,6 +23,11 @@ const {
 } = wfs
 
 describe('wfsToGeoJSON function', () => {
+  const projectionOptions = {
+    inputProjection: 'EPSG:2154',
+    outputProjection: 'EPSG:4326'
+  }
+
   const sampleFileNames = [
     'sample-ok-3.xml',
     'sample-ko.xml',
@@ -45,12 +50,12 @@ describe('wfsToGeoJSON function', () => {
     sampleFileNames.forEach(fileName => {
       it(`shouldn't throw with ${fileName}`, () => {
         const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
-        assert.doesNotThrow(wfsFeatureCollectionToGeoJSON.bind(null, sample))
+        assert.doesNotThrow(wfsFeatureCollectionToGeoJSON.bind(null, sample, projectionOptions))
       })
 
       it(`should be a geoJSON FeatureCollection with ${fileName}`, () => {
         const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
-        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
         assert.ok(parsedFeatureCollection)
         assert.propertyVal(parsedFeatureCollection, 'type', 'FeatureCollection')
@@ -71,7 +76,7 @@ describe('wfsToGeoJSON function', () => {
       it(`should have features with ${fileName}`, () => {
         const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
 
-        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
         assert.notNestedPropertyVal(parsedFeatureCollection, 'features.length', 0)
       })
@@ -79,7 +84,7 @@ describe('wfsToGeoJSON function', () => {
       it(`should have features with only EPSG:4326 coordinates with ${fileName}`, () => {
         const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
 
-        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
         positionsOf(parsedFeatureCollection).forEach(([lng, lat]) => {
           assert.isBelow(lng, 180)
@@ -92,7 +97,7 @@ describe('wfsToGeoJSON function', () => {
       it(`should have features of type polygon or MultiPolygon ${fileName}`, () => {
         const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
 
-        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
         geometriesOf(parsedFeatureCollection).forEach(geometry => {
           assert.include(['Polygon', 'MultiPolygon'], geometry.type)
@@ -111,7 +116,7 @@ describe('wfsToGeoJSON function', () => {
     })
 
     it('should have 3 features', () => {
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       assert.nestedPropertyVal(parsedFeatureCollection, 'features.length', 3)
       parsedFeatureCollection.features.forEach(feature => assert.ok(isFeature(feature)))
@@ -132,14 +137,14 @@ describe('wfsToGeoJSON function', () => {
     })
 
     it('should have 1 feature', () => {
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       assert.nestedPropertyVal(parsedFeatureCollection, 'features.length', 1)
       parsedFeatureCollection.features.forEach(feature => assert.ok(isFeature(feature)))
     })
 
     it('should return clockwises Features', () => {
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       geometriesOf(parsedFeatureCollection).forEach(geometry => {
         switch (geometry.type) {
@@ -171,14 +176,14 @@ describe('wfsToGeoJSON function', () => {
     })
 
     it('should have 1 feature', () => {
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       assert.nestedPropertyVal(parsedFeatureCollection, 'features.length', 1)
       parsedFeatureCollection.features.forEach(feature => assert.ok(isFeature(feature)))
     })
 
     it('should return clockwises Features', () => {
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       geometriesOf(parsedFeatureCollection).forEach(geometry => {
         switch (geometry.type) {
@@ -203,7 +208,7 @@ describe('wfsToGeoJSON function', () => {
   describe(`Sample ${notWorkingSampleEmptyFileName}`, () => {
     it('should have 0 feature', () => {
       const sample = fs.readFileSync(path.resolve(__dirname, notWorkingSampleEmptyFileName), 'UTF-8')
-      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample)
+      const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
 
       assert.nestedPropertyVal(parsedFeatureCollection, 'features.length', 0)
     })
