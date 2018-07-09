@@ -63,6 +63,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
+    "@permettezmoideconstruire/traverse-geojson": "0.0.1-alpha",
     "canvas-prebuilt": "^1.6.5-prerelease.1",
     "gjtk": "^2.0.0",
     "jsdom": "^11.11.0",

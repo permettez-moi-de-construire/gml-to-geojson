@@ -255,6 +255,39 @@ describe('wfsToGeoJSON function', () => {
           assert.propertyVal(feature.properties, 'TYPE_PROT', 'testValue')
         })
       })
+
+      it(`should add 'z' in coordinates with keepZ option with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            keepZ: true
+          }
+        )
+
+        const positions = positionsOf(parsedFeatureCollection)
+        assert.notEmpty(positions)
+        positionsOf(parsedFeatureCollection).forEach(position => {
+          assert.lengthOf(position, 3)
+        })
+      })
+
+      it(`should add 'z' in coordinates without keepZ option with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions
+          }
+        )
+
+        const positions = positionsOf(parsedFeatureCollection)
+        assert.notEmpty(positions)
+        positionsOf(parsedFeatureCollection).forEach(position => {
+          assert.lengthOf(position, 2)
+        })
+      })
     })
   })
 

@@ -5,6 +5,7 @@ import { register as registerProj4 } from 'ol/proj/proj4'
 import proj4 from 'proj4'
 import pick from 'lodash/pick'
 import omit from 'lodash/omit'
+import { mapGeojsonPositions } from '@permettezmoideconstruire/traverse-geojson'
 
 registerProj4(proj4)
 
@@ -20,7 +21,8 @@ const featureCollectionToGeoJSON = function (wfsFeatureCollectionString, paramOp
     precision: 6,
     pickProperties: null,
     omitProperties: null,
-    featureTransformer: null
+    featureTransformer: null,
+    keepZ: false
   }
 
   const options = {
@@ -56,6 +58,10 @@ const featureCollectionToGeoJSON = function (wfsFeatureCollectionString, paramOp
       ...feature,
       properties: omit(feature.properties, options.omitProperties)
     }))
+  }
+
+  if (!options.keepZ) {
+    transformers.push(feature => mapGeojsonPositions(feature, ([lng, lat]) => ([lng, lat])))
   }
 
   if (options.featureTransformer) {
