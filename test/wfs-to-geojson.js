@@ -6,7 +6,7 @@ import {
 } from '../dist/gml-to-geojson'
 import fs from 'fs-extra'
 import path from 'path'
-import { isFeatureCollection, isFeature, positionsOf, geometriesOf, featuresOf } from 'gjtk'
+import { isFeatureCollection, isFeature, positionsOf, geometriesOf } from 'gjtk'
 import isClockWise from '@turf/boolean-clockwise'
 
 const validateRings = rings => {
