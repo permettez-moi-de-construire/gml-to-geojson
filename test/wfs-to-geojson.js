@@ -6,7 +6,7 @@ import {
 } from '../dist/gml-to-geojson'
 import fs from 'fs-extra'
 import path from 'path'
-import { isFeatureCollection, isFeature, positionsOf, geometriesOf } from 'gjtk'
+import { isFeatureCollection, isFeature, positionsOf, geometriesOf, featuresOf } from 'gjtk'
 import isClockWise from '@turf/boolean-clockwise'
 
 const validateRings = rings => {
@@ -149,6 +149,41 @@ describe('wfsToGeoJSON function', () => {
         assert(positionsOf(parsedFeatureCollection).some(coordinate => {
           return getPrecision(coordinate[0]) === precision || getPrecision(coordinate[1]) === precision
         }), `Some coordinates actually have ${precision} decimals precision`)
+      })
+
+      it(`should keep only picked up properties (pickProperties option) with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const keys = ['TYPE_PROT']
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            pickProperties: keys
+          }
+        )
+
+        parsedFeatureCollection.features.forEach(feature => {
+          assert.hasAllKeys(feature.properties, keys)
+          assert.lengthOf(Object.keys(feature.properties), keys.length)
+        })
+      })
+
+      it(`should omit omitted properties (omitProperties option) with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const keys = ['TYPE_PROT']
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            omitProperties: keys
+          }
+        )
+
+        parsedFeatureCollection.features.forEach(feature => {
+          assert.doesNotHaveAnyKeys(feature.properties, keys)
+        })
       })
     })
   })
