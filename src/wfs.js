@@ -11,25 +11,34 @@ registerProj4(proj4)
  * @param {String} wfsFeatureCollectionString
  * @returns {Object} GeoJSON FeatureCollection
  */
-const featureCollectionToGeoJSON = function (wfsFeatureCollectionString, options) {
+const featureCollectionToGeoJSON = function (wfsFeatureCollectionString, paramOptions) {
   const defaultOptions = {
     inputProjection: undefined,
     outputProjection: 'EPSG:4326',
-    ...options
+    precision: 6
   }
+
+  const options = {
+    ...defaultOptions,
+    ...paramOptions
+  }
+
   const wfs = new Wfs({
     gmlFormat: new Gml()
   })
   const geoJSON = new GeoJSON()
+
   const foundFeatures = wfs.readFeatures(wfsFeatureCollectionString, {
-    dataProjection: defaultOptions.inputProjection,
-    featureProjection: defaultOptions.outputProjection
+    dataProjection: options.inputProjection,
+    featureProjection: options.outputProjection
   })
   const foundFeatureCollection = geoJSON.writeFeaturesObject(foundFeatures, {
-    dataProjection: defaultOptions.outputProjection,
-    featureProjection: defaultOptions.outputProjection,
-    rightHanded: true
+    dataProjection: options.outputProjection,
+    featureProjection: options.outputProjection,
+    rightHanded: true,
+    decimals: options.precision
   })
+
   return foundFeatureCollection
 }
 

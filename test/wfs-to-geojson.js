@@ -103,6 +103,53 @@ describe('wfsToGeoJSON function', () => {
           assert.include(['Polygon', 'MultiPolygon'], geometry.type)
         })
       })
+
+      const getPrecision = (a) => {
+        if (!isFinite(a)) return 0
+
+        let e = 1
+        let p = 0
+
+        while (Math.round(a * e) / e !== a) { e *= 10; p++ }
+        return p
+      }
+
+      it(`should have a maximum of 6 decimals precision by default with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(sample, projectionOptions)
+
+        positionsOf(parsedFeatureCollection).forEach(coordinates => {
+          assert.isAtMost(getPrecision(coordinates[0]), 6)
+          assert.isAtMost(getPrecision(coordinates[1]), 6)
+        })
+
+        assert(positionsOf(parsedFeatureCollection).some(coordinate => {
+          return getPrecision(coordinate[0]) === 6 || getPrecision(coordinate[1]) === 6
+        }), 'Some coordinates actually have 6 decimals precision')
+      })
+
+      it(`should have a maximum of x (param) decimals precision with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const precision = 7
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            precision
+          }
+        )
+
+        positionsOf(parsedFeatureCollection).forEach(coordinates => {
+          assert.isAtMost(getPrecision(coordinates[0]), precision)
+          assert.isAtMost(getPrecision(coordinates[1]), precision)
+        })
+
+        assert(positionsOf(parsedFeatureCollection).some(coordinate => {
+          return getPrecision(coordinate[0]) === precision || getPrecision(coordinate[1]) === precision
+        }), `Some coordinates actually have ${precision} decimals precision`)
+      })
     })
   })
 
