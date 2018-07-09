@@ -165,7 +165,6 @@ describe('wfsToGeoJSON function', () => {
 
         parsedFeatureCollection.features.forEach(feature => {
           assert.hasAllKeys(feature.properties, keys)
-          assert.lengthOf(Object.keys(feature.properties), keys.length)
         })
       })
 
@@ -183,6 +182,77 @@ describe('wfsToGeoJSON function', () => {
 
         parsedFeatureCollection.features.forEach(feature => {
           assert.doesNotHaveAnyKeys(feature.properties, keys)
+        })
+      })
+
+      it(`should run featureTransformer option with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            featureTransformer: feature => ({
+              ...feature,
+              properties: {
+                ...feature.properties,
+                testKey: 'testValue'
+              }
+            })
+          }
+        )
+
+        parsedFeatureCollection.features.forEach(feature => {
+          assert.property(feature.properties, 'testKey')
+          assert.propertyVal(feature.properties, 'testKey', 'testValue')
+        })
+      })
+
+      it(`should run pickProperties option before featureTransformer option with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const keys = ['TYPE_PROT']
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            pickProperties: keys,
+            featureTransformer: feature => ({
+              ...feature,
+              properties: {
+                ...feature.properties,
+                testKey: 'testValue'
+              }
+            })
+          }
+        )
+
+        parsedFeatureCollection.features.forEach(feature => {
+          assert.hasAllKeys(feature.properties, [...keys, 'testKey'])
+        })
+      })
+
+      it(`should run omitProperties option before featureTransformer option with ${fileName}`, () => {
+        const sample = fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8')
+
+        const keys = ['TYPE_PROT']
+
+        const parsedFeatureCollection = wfsFeatureCollectionToGeoJSON(
+          sample, {
+            ...projectionOptions,
+            omitProperties: keys,
+            featureTransformer: feature => ({
+              ...feature,
+              properties: {
+                ...feature.properties,
+                TYPE_PROT: 'testValue'
+              }
+            })
+          }
+        )
+
+        parsedFeatureCollection.features.forEach(feature => {
+          assert.property(feature.properties, 'TYPE_PROT')
+          assert.propertyVal(feature.properties, 'TYPE_PROT', 'testValue')
         })
       })
     })
