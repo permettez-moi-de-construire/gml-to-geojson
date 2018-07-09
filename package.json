@@ -63,9 +63,10 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
     "gjtk": "^2.0.0",
     "jsdom": "^11.11.0",
-    "ol": "^4.6.5",
+    "ol": "^5.0.2",
     "proj4": "^2.4.4",
     "xmlserializer": "^0.6.1"
   }

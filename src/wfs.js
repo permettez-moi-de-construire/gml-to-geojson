@@ -1,10 +1,10 @@
 import Gml from 'ol/format/gml'
 import Wfs from 'ol/format/wfs'
 import GeoJSON from 'ol/format/geojson'
-import proj from 'ol/proj'
+import { register as registerProj4 } from 'ol/proj/proj4'
 import proj4 from 'proj4'
 
-proj.setProj4(proj4)
+registerProj4(proj4)
 
 /**
  * Convert a WFS FeatureCollection to a GeoJSON FeatureCollection
