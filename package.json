@@ -12,8 +12,8 @@
     "doc": "npm run clean:doc && npm run ready:doc && jsdoc2md src/*.js src/**/*.js > doc/API.md",
     "build": "npm run compile && npm run test",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha --require @babel/register --colors --recursive --require ./test/index.js ./test/**/*.js",
-    "test:watch": "mocha --require @babel/register --colors -w --recursive --require ./test/index.js ./test/**/*.js"
+    "test": "mocha --require @babel/register --colors --recursive --require ./test/index.js ./test/**/*.test.js",
+    "test:watch": "mocha --require @babel/register --colors -w --recursive --require ./test/index.js ./test/**/*.test.js"
   },
   "standard": {
     "parser": "babel-eslint"
@@ -67,7 +67,7 @@
     "canvas-prebuilt": "^1.6.5-prerelease.1",
     "gjtk": "^2.0.0",
     "jsdom": "^11.11.0",
-    "ol": "^5.0.2",
+    "ol": "^5.1.3",
     "proj4": "^2.4.4",
     "xmlserializer": "^0.6.1"
   }
