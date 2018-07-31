@@ -7,8 +7,6 @@ import pick from 'lodash/pick'
 import omit from 'lodash/omit'
 import { mapGeojsonPositions } from '@permettezmoideconstruire/traverse-geojson'
 
-registerProj4(proj4)
-
 /**
  * Convert a WFS FeatureCollection to a GeoJSON FeatureCollection
  * @param {String} wfsFeatureCollectionString
@@ -22,13 +20,16 @@ const featureCollectionToGeoJSON = function (wfsFeatureCollectionString, paramOp
     pickProperties: null,
     omitProperties: null,
     featureTransformer: null,
-    keepZ: false
+    keepZ: false,
+    proj4: proj4
   }
 
   const options = {
     ...defaultOptions,
     ...paramOptions
   }
+
+  registerProj4(options.proj4)
 
   const wfs = new Wfs({
     gmlFormat: new Gml()

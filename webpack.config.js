@@ -34,7 +34,7 @@ const config = {
       },
       {
         test: /node_modules\/ol/,
-        use: 'imports-loader?window.proj4=browser-shim-proj4,navigator=>{userAgent: ""},document=browser-shim-document,Document=browser-shim-upper-document,Node=browser-shim-node,DOMParser=browser-shim-dom-parser,XMLSerializer=browser-shim-xml-serializer'
+        use: 'imports-loader?window=>{},navigator=>{userAgent: ""},document=browser-shim-document,Document=browser-shim-upper-document,Node=browser-shim-node,DOMParser=browser-shim-dom-parser,XMLSerializer=browser-shim-xml-serializer'
       }
     ]
   },
@@ -47,7 +47,7 @@ const config = {
       'browser-shim-dom-parser': path.resolve(__dirname, 'src', 'browser-shim', 'dom-parser'),
       'browser-shim-node': path.resolve(__dirname, 'src', 'browser-shim', 'node'),
       'browser-shim-xml-serializer': path.resolve(__dirname, 'src', 'browser-shim', 'xml-serializer'),
-      'browser-shim-proj4': path.resolve(__dirname, 'src', 'browser-shim', 'proj4')
+      // 'browser-shim-proj4': path.resolve(__dirname, 'src', 'browser-shim', 'proj4')
     }
   },
   // plugins: plugins,
